@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block main %}
+    {% for character in characters %}
+        <a class="routes" href="{{ url_for('character', id=character.id) }}">
+            <div class="characterContainer">
+                <h3>Name: {{ character.name }}</h3>
+                {% if character.title %}
+                    <h3>Title: {{ character.title }}</h3>
+                {% endif %}
+                {% if character.race %}
+                    <h3>Race: {{ character.race }}</h3>
+                {% if character.homeland %}
+                {% endif %}
+                    <h3>Homeland: {{ character.homeland }}</h3>
+                {% endif %}
+            </div>
+        </a>
+            
+    {% endfor %}
+{% endblock %}

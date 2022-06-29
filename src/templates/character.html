@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block main %}
+<div class="soloCharacterContainer">
+    <div class="soloCharacterInfo">
+        <h1>Name</h1>
+        <h2>{{ character.name }}</h2>
+    </div>
+    {% if character.title %}
+        <div class="soloCharacterInfo">
+            <h1>Title</h1>
+            <h2>{{ character.title }}</h2>
+        </div>
+    {% endif %}
+    {% if character.race %}
+        <div class="soloCharacterInfo">
+            <h1>Race</h1>
+            <h2>{{ character.race }}</h2>
+        </div>
+    {% endif %}
+    {% if character.homeland %}
+        <div class="soloCharacterInfo">
+            <h1>Homeland</h1>
+            <h2>{{ character.homeland }}</h2>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
