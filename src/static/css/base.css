@@ -87,3 +87,10 @@ header h2 {
     font-size: 12pt;
     margin-top: 0px;
 }
+
+.documentationHeader {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}

@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block main %}
+<div class="documentationHeader">
+    <h1>Documentation</h1>
+    <h3>How to use our RESTful API...</h3>
+</div>
+
+<div class="documentationContainer">
+    <h2>First things first. If you don't have one, <a href="{{ url_for('api_key') }}">get an API token.</h2></a>
+    <p>Please provide your Discord name. We don't have login functionality yet, so please keep it safe.</p>
+</div>
+
+<div class="documentationContainer"></div>
+    <h2>Use this API token as a query for all your requests. Be sure to add it at the end or you will get an error. Like so.</h2>
+    <p>base-url/your_request?token=put-your-token-here</p>
+</div>
+
+<div class="documentationContainer"></div>
+    <h2>Base url</h2>
+    <p>All RESTful api requests are through this base url...</p>
+    <p>https://wheel-of-time-api.herokuapp.com/api</p>
+</div>
+
+<div class="documentationContainer"></div>
+    <h2>Response</h2>
+    <p>The response will come back as JSON data.</p>
+</div>
+
+<div class="documentationContainer"></div>
+    <h2>Get list of WOT characters. Will return a list of JSON objects, all of which have an id, name, title, race, and homeland.</h2>
+    <p>/characters</p>
+</div>
+
+<div class="documentationContainer"></div>
+    <h2>Get an individual character. Will require the id as an argument. The id for each character is an integer.</h2>
+    <p>/characters/~id~</p>
+</div>
+
+
+
+
+{% endblock %}

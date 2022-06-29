@@ -29,6 +29,10 @@ def load_user(user_id):
 def home():
     return render_template("home.html", title="WOT API")
 
+@app.route("/documentation")
+def documentation():
+    return render_template("documentation.html", title="WOT API Docs")
+
 
 
 
