@@ -1,15 +1,21 @@
 from os import environ
 from flask import Flask, render_template, url_for, jsonify, request
 from flask_login import LoginManager
+from flask_migrate import Migrate
 
+from .model import db, connect_to_db, User, APIKey, APIRequest, Character
+from .forms import RegisterForm
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = environ["SECRET_KEY"]
 app.config['SQLALCHEMY_DATABASE_URI'] = environ["POSTGRES_URI"]
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-from .model import db, User, APIKey, APIRequest, Character
-from .forms import RegisterForm
+connect_to_db(app)
+
+migrate = Migrate(app, db)
+
+
 
 login_manager = LoginManager()
 login_manager.init_app(app)
