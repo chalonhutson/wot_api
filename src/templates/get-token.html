@@ -1,17 +1,11 @@
 {% extends "base.html" %}
 {% block main %}
-<form action="/register" method="post">
+<form method="post" action="{{ url_for('api_key') }}">
     {{ form.csrf_token }}
     {{ form.first_name.label }}
     {{ form.first_name }}
     {{ form.last_name.label }}
     {{ form.last_name }}
-    {{ form.email.label }}
-    {{ form.email }}
-    {{ form.password.label }}
-    {{ form.password }}
-    {{ form.password_confirm.label }}
-    {{ form.password_confirm }}
     {{ form.discord.label }}
     {{ form.discord }}
     {{ form.submit.label }}
