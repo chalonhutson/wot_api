@@ -1,6 +1,7 @@
 from os import environ
 from flask_sqlalchemy import SQLAlchemy
-
+from flask_login import UserMixin
+from werkzeug.security import generate_password_hash
 
 if __name__ == "__main__":
     from controller import generate_api_key
@@ -10,28 +11,51 @@ else:
 db = SQLAlchemy()
 
 
-class User(db.Model):
+class User(db.Model, UserMixin):
 
     __tablename__ = "users"
 
     id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    api_key = db.Column(db.String(200), nullable=False)
     first_name = db.Column(db.String(99), nullable=False)
     last_name = db.Column(db.String(99), nullable=False)
-    discord_tag = db.Column(db.String(99), nullable=False)
+    discord = db.Column(db.String(99), nullable=True)
     is_active = db.Column(db.Boolean, default=True)
 
-    def __init__(self, first_name, last_name, discord_tag):
+    def __init__(self, first_name, last_name, discord):
         self.first_name = first_name
         self.last_name = last_name
-        self.discord_tag = discord_tag
-        self.api_key = generate_api_key({u.api_key for u in User.query.all()})
+        self.discord = discord
 
     def __repr__(self):
         return f"<User: id={self.id}, name={self.first_name} {self.last_name}, discord={self.discord_tag}>"
 
-    
+class APIKey(db.Model):
 
+    __tablename__ = "api_keys"
+
+    id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    api_key = db.Column(db.String(200), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+    active = db.Column(db.Boolean, default=True)
+
+    def __init__(self, user_id):
+        self.api_key = generate_api_key({u.api_key for u in APIKey.query.all()})
+        self.user_id = user_id
+        self.active = True
+
+class APIRequest(db.Model):
+
+    __tablename__ = "api_requests"
+
+    id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+    endpoint = db.Column(db.String(99))
+    success = db.Column(db.Boolean)
+
+    def __init__(self, user_id, endpoint, success):
+        self.user_id = user_id
+        self.endpoint = endpoint
+        self.success = success
 
 class Character(db.Model):
 
